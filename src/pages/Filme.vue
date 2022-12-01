@@ -11,8 +11,12 @@
       <p>{{ filme.sinopse }}</p>
       <div class="botoes">
         <router-link tag="button" to="/">Ver mais filmes</router-link>
-        <button>Salvar</button>
-        <button>Trailer</button>
+        <button @click="salvarFilme()">Salvar</button>
+        <button>          
+          <a :href="`https://www.youtube.com/results?search_query=trailer+${filme.nome}`" target="_blank">
+            Trailer
+          </a>          
+        </button>        
       </div>
     </div>
   </div>
@@ -35,10 +39,28 @@ export default {
       }
     },
     async created () {
-      console.log(this)
       const response = await api.get(`?api=filmes/${this.id}`);
       this.filme = response.data;
       this.loading = false;
+    },
+    methods: {
+      salvarFilme () {
+        const minhaLista = localStorage.getItem('myfilme');
+        let filmes = JSON.parse(minhaLista) || [];
+        
+        //se tentar salvar um filme com id que já está salvo ele n faz nada
+        const hasFilme = filmes.some( (filme) => filme.id === this.filme.id);
+
+        if (hasFilme) {
+          alert('Esse filme já está salvo nos favoritos.')
+          return;
+          //parar o código aqui
+        } 
+
+        filmes.push(this.filme);
+        localStorage.setItem('myfilme', JSON.stringify(filmes));
+        alert('Filme salvo com sucesso!')
+      }
     }
 }
 </script>

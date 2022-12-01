@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header />
-    <h1>Home</h1>
+    <router-view />
   </div>
 </template>
 
@@ -17,5 +17,11 @@ export default {
 </script>
 
 <style scoped>
-
+  #app {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 </style>

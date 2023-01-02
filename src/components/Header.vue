@@ -1,6 +1,6 @@
 <template>
   <header id="header">
-    <router-link to="/" exact>Filmaria</router-link>
+    <router-link to="/" exact>TW FILMES</router-link>
     <router-link tag="button" to="/salvos" exact class="meus-filmes">Salvos</router-link>
   </header>
 </template>
